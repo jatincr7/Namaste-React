@@ -20,7 +20,7 @@ const About = lazy(() =>import ("./src/components/About"))
 
 const AppLayout = () => {
     return (
-        <div className='app'>
+        <div className=''>
             <Header />
             <Outlet/>
             

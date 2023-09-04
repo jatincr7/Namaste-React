@@ -23,8 +23,11 @@
   },
   "homepage": "https://github.com/jatincr7/Namaste-React#readme",
   "devDependencies": {
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "parcel": "^2.9.3",
-    "process": "^0.11.10"
+    "postcss": "^8.4.29",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "react": "^18.2.0",

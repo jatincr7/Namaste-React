@@ -59,17 +59,16 @@ const Body =  () => {
     <div className='body'>
       <div className="filter">
         <div className='search'>
-          <input type="search" className='search-box' value={searchText} onChange={(e) => {
+          <input type="search m-4 p-4" className='search-box' value={searchText} onChange={(e) => {
             setSearchText(e.target.value)
             console.log(e.target.value)
           }} />
-          <button onClick={() => {
+          <button className='px-4 py-2 bg-green-200 rounded-lg' onClick={() => {
             let searchItem = listofResturants.filter((e) => e.info.name.toLowerCase().includes(searchText.toLowerCase())) 
             console.log('item>>....',searchItem)
             setfilteredResturant(searchItem);
           }} >search</button>
-        </div>
-        <button className='filter-btn' onClick={() => {
+          <button className='px-4 py-2 w-[300px]bg-gray rounded-lg' onClick={() => {
           const resData = listofResturants.filter((res) =>
 
             res?.info?.rating > 4)        
@@ -81,10 +80,12 @@ const Body =  () => {
                 
         }>
           Best Resturants</button>
+        </div>
+        
                 
       </div>
       <div />
-      <div className='res-container'></div>
+      <div className='flex flex-wrap'>
       {
 
 
@@ -96,7 +97,8 @@ const Body =  () => {
             <ResturantCard resData={resturants?.info} />
           </Link>)
       }
-    </div>
+      </div>
+      </div>
   )
 
 }
