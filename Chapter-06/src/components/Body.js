@@ -2,24 +2,30 @@
 
 import ResturantCard from './ResturantCard';
 import Shimmer from './Shimmer.js'
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import {withPromotedLabel} from './ResturantCard'
+import UserContext from '../utils/userContext';
 const Body =  () => {
   const [listofResturants, setListofResturants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredResturant, setfilteredResturant] = useState([]);
-  console.log("body rendered ")
+
+
+
+
   useEffect(() => {
     getResurants()
     
-  },[])
+  }, [])
+  const  ResturandCardPromoted=withPromotedLabel(ResturantCard)
 
  
   
   const getResurants = async () => {
     try {
-      let data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      let data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data.json();
       let resturantjson =await mapData(json);
       setListofResturants(resturantjson)
@@ -52,6 +58,7 @@ const Body =  () => {
       </div>)
   }
 // conditional rendering 
+  const {loggedInUser,setUserName}=useContext(UserContext)
   if (listofResturants.length === 0 ) {
     return(<Shimmer/>)
   }
@@ -79,7 +86,10 @@ const Body =  () => {
                  
                 
         }>
-          Best Resturants</button>
+            Best Resturants</button>
+            <input type="search m-4 p-4" className='search-box' value={loggedInUser} onChange={(e) => {
+            setUserName(e.target.value)
+          }} />
         </div>
         
                 
@@ -94,7 +104,10 @@ const Body =  () => {
             key={key = resturants?.info?.id}
             to={"/resturant/"+ resturants.info.id}
           >
-            <ResturantCard resData={resturants?.info} />
+            {resturants?.info.avgRating >4.1 ? (<ResturandCardPromoted resData={ resturants?.info} />):( <ResturantCard resData={resturants?.info} />)}
+
+
+           
           </Link>)
       }
       </div>

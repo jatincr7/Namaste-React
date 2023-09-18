@@ -1,6 +1,7 @@
-import { useState } from 'react';
+
 import UserClass from './User';
 
+import UserContext from '../utils/userContext';
 import React  from 'react';
 
 // const About = () => {
@@ -32,6 +33,7 @@ console.log("parent constructor called ")
             <h1>About </h1>
             <h2>This is Namaste Web Series </h2>
                 <h3></h3>
+                <UserContext.Provider > {({ loggedInUser }) => <h3>{loggedInUser}</h3>} </UserContext.Provider>
                 <UserClass name={"Jatin "} location={"Gurgaon" } />
             <UserClass name={"Mark Zuckerbarck "} location={"California" } />
        </div>)

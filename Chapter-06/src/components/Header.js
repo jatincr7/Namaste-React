@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { APP_LOGO } from '../utils/Image';
 import ReactDOM from 'react-dom/client';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/userContext';
 
 
 const Header = () => {
     const [buttonName, setButtonName] = useState("Login")
-    const onlineStatus=useOnlineStatus()
+    const onlineStatus = useOnlineStatus()
+    const{loggedInUser}=useContext(UserContext);
+
  
     useEffect(() => {
         console.log('useeffect called ')
@@ -32,13 +35,12 @@ const Header = () => {
                     <li className='px-4'>
                         <Link to='/grocery'>Grocery</Link>
                     </li>
-                    <li className='px-4'>Cart</li>
+                    <li className='px-4'>{loggedInUser }</li>
                     <li  button className='px-4' onClick={() => {
                         console.log('button clicked ')
                        buttonName==='Login'?setButtonName('Logout'):setButtonName('Login')
 
                         
-
                         
                     }
                         
