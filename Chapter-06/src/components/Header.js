@@ -4,12 +4,15 @@ import ReactDOM from 'react-dom/client';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/userContext';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 
 const Header = () => {
     const [buttonName, setButtonName] = useState("Login")
     const onlineStatus = useOnlineStatus()
-    const{loggedInUser}=useContext(UserContext);
+    const { loggedInUser } = useContext(UserContext)
+    const cartItems = useSelector(store => store.cart.items)
+    
 
  
     useEffect(() => {
@@ -33,11 +36,11 @@ const Header = () => {
                         <Link to='/contact'>Contact</Link>
                     </li>
                     <li className='px-4'>
-                        <Link to='/grocery'>Grocery</Link>
+                        <Link to='/cart'>Cart ({cartItems.length })Items</Link>
                     </li>
                     <li className='px-4'>{loggedInUser }</li>
                     <li  button className='px-4' onClick={() => {
-                        console.log('button clicked ')
+              
                        buttonName==='Login'?setButtonName('Logout'):setButtonName('Login')
 
                         

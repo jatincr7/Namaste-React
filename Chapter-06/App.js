@@ -10,6 +10,10 @@ import Contact from './src/components/Contact.js';
 import Error from  './src/components/Error.js'
 import ResturantMenu from './src/components/ResturantMenu.js';
 import UserContext from './src/utils/userContext.js';
+import { Provider } from 'react-redux';
+import appStore from './src/utils/appStore.js';
+import Cart from './src/components/Cart.js';
+// Bridge between redux and react//
 
 
 
@@ -30,6 +34,7 @@ const AppLayout = () => {
          
      },[])
     return (
+        <Provider store={ appStore}>
         <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
             <div className=''>
                 <UserContext.Provider value={{ loggedInUser:'Elon Musk' }}>
@@ -41,6 +46,7 @@ const AppLayout = () => {
             
             </div>
             </UserContext.Provider>
+            </Provider>
    )
 }
 
@@ -53,6 +59,10 @@ const appRouter = createBrowserRouter([
             {
                 path: '/',
                 element:<Body/>
+            },
+            {
+                path: '/cart',
+                element:<Cart/>
            },
             {
                 path: "/about",
